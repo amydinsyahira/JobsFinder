@@ -4,7 +4,8 @@ const _ = require('lodash')
 const FeedSub = require('feedsub')
 const rssFeed = credentials.rss_feed
 let reader = new FeedSub(rssFeed, {
-  interval: 1 // Check feed every 1 minute.
+  interval: 0.5, // Check feed every 0.5 minute.
+  forceInterval: true
 })
 
 const low = require('lowdb')
