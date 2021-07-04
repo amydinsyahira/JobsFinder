@@ -4,7 +4,7 @@ const _ = require('lodash')
 const FeedSub = require('feedsub')
 const rssFeed = credentials.rss_feed
 let reader = new FeedSub(rssFeed, {
-  interval: 0.5, // Check feed every 0.5 minute.
+  interval: 0.25, // Check feed every 0.25 minute.
   forceInterval: true
 })
 
@@ -46,12 +46,14 @@ reader.on('item', (item) => {
     var message = "<strong><b>" + item.title + "</b></strong><br /><br />"
     message += item.description
     message = _.replace(
-      _.trim(
-        _.unescape(
-          _.deburr(message)
+      _.replace(
+        _.trim(
+          _.unescape(
+            _.deburr(message)
+          )
         )
-      )
-    , /\s\s+/g, ' ')
+      , /\s\s+/g, ' ')
+    , /&nbsp;/g, ' ')
     const oldstring = "<br />"
     const newstring = "\n"
     while (message.indexOf(oldstring) > -1) {
