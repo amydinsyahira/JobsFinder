@@ -41,11 +41,13 @@ reader.on('item', (item) => {
   } else {
     db.get('feed').push(item).write()
 
-    var message = item.description
+    var message = "**" + item.title + "**\n"
+    message += item.description
     const oldstring = "<br />"
     const newstring = "\n"
     while (message.indexOf(oldstring) > -1) {
       message = message.replace(oldstring, newstring)
+      message = message.replace("&nbsp;", " ")
     }
 
     bot.telegram.sendMessage(credentials.telegram_channel, message, Extra.HTML().markup())
