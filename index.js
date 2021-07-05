@@ -34,13 +34,12 @@ bot.use((ctx, next) => {
 })
 
 reader.on('item', (item) => {
-  console.log(item.title)
-
   const itemInDb = db.get('feed').find({ link: item.link }).value()
   if (itemInDb) {
-    console.log("This item is already exists:")
-    console.log(itemInDb.link)
+    /* console.log("This item is already exists:")
+    console.log(itemInDb.link) */
   } else {
+    console.log(item.title)
     db.get('feed').push(item).write()
 
     var message = "<strong><b>" + item.title + "</b></strong><br /><br />"
