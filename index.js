@@ -33,13 +33,14 @@ bot.use((ctx, next) => {
   })
 })
 
+var countMessage = 0
 reader.on('item', (item) => {
   const itemInDb = db.get('feed').find({ link: item.link }).value()
   if (itemInDb) {
     /* console.log("This item is already exists:")
     console.log(itemInDb.link) */
   } else {
-    console.log(item.title)
+    countMessage++
     db.get('feed').push(item).write()
 
     var message = "<strong><b>" + item.title + "</b></strong><br /><br />"
@@ -60,7 +61,10 @@ reader.on('item', (item) => {
     }
     message = _.replace(message, /\n\s*\n\s*\n/g, "\n\n")
 
-    bot.telegram.sendMessage(credentials.telegram_channel, message, Extra.HTML().markup())
+    if (countMessage >= 10) countMessage = 1
+    setTimeout(() => {
+      bot.telegram.sendMessage(credentials.telegram_channel, message, Extra.HTML().markup())
+    }, 200 * countMessage);
   }
 })
 

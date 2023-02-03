@@ -1,6 +1,17 @@
 # JobsFinder
 A script which parses Upwork RSS feed and sends notifications to Telegram.
 
+- `credentials.json`
+
+```
+{
+  "rss_feed": "https://www.upwork.com/ab/feed/topics/rss?securityToken=e585719edx78fiej4i4bc2a371f2c911456faaedwf8dw78f0a3eb22866bc5da58c591a2de5c0b1da75d4f0cdfe4a98cf93ff6eda734c77098331ccadf266a&userUid=783174439909315840&orgUid=783172333092510145",
+  "telegram_bot_token": "1139290717:AAG_XGrivhLGmU90YQ_owSRmw57QxQ4aPgE",
+  "telegram_channel": "@ais8d1xxpw0rkf33d"
+}
+```
+
+- `index.js`
 ```js
 const credentials = require('./credentials.json')
 
